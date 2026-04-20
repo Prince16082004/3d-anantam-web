@@ -1,0 +1,43 @@
+/* Magnetic Cursor CSS */
+.cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-brand-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: 0 0 10px var(--color-brand-primary);
+}
+
+.cursor-outline {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 255, 204, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.cursor-outline.hovering {
+    width: 50px;
+    height: 50px;
+    border-color: rgba(0, 255, 204, 0.2);
+    background-color: rgba(0, 255, 204, 0.1);
+    backdrop-filter: blur(2px);
+}
+
+/* Hide default cursor only if device supports hover */
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    a, button {
+        cursor: none;
+    }
+}

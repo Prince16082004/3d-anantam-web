@@ -1,0 +1,189 @@
+:root {
+  /* Vibrant & Premium Theme System */
+  --color-bg-base: #fdfdfd;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #f8f9fa;
+  --color-brand-primary: #5d17df; /* Instagram-inspired Indigo */
+  --color-brand-secondary: #070bff; /* Cyber Blue */
+  --color-text-primary: #101828;
+  --color-text-secondary: #475467;
+  --color-border: #eaecf0;
+  
+  /* Typography - Modern & Industrial */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Gradients */
+  --gradient-glow: radial-gradient(circle, rgba(93, 23, 223, 0.08) 0%, rgba(253, 253, 253, 0) 70%);
+  --gradient-primary: linear-gradient(135deg, #5d17df 0%, #070bff 100%);
+  --gradient-insta: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  --gradient-text: linear-gradient(90deg, #101828, #475467);
+
+  /* Animation Timings */
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(16, 24, 40, 0.1), 0 2px 4px -1px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(16, 24, 40, 0.1), 0 4px 6px -2px rgba(16, 24, 40, 0.05);
+}
+
+[data-theme='dark'] {
+  --color-bg-base: #050508;
+  --color-bg-surface: #0c0c14;
+  --color-bg-elevated: #151525;
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+  --color-border: #1f2937;
+  --gradient-glow: radial-gradient(circle, rgba(93, 23, 223, 0.15) 0%, rgba(5, 5, 8, 0) 70%);
+  --gradient-text: linear-gradient(90deg, #f3f4f6, #9ca3af);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-brand-primary);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Glassmorphism Utilities (Updated for Light Theme) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-lg);
+  border-radius: 16px;
+}
+
+/* Text Gradients */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button Classes */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 10px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(88, 81, 219, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-brand-primary);
+  border: 2px solid var(--color-brand-primary);
+  font-weight: 600;
+  padding: 10px 26px;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline:hover {
+  background: rgba(0, 255, 204, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Base Inputs */
+.input-field {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  color: white;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-brand-primary);
+  background: rgba(0, 255, 204, 0.02);
+}
+
+/* Layout utilities */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+/* Background Glow globally positioned */
+.bg-glow-top {
+  position: absolute;
+  top: -10vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 50vw;
+  background: var(--gradient-glow);
+  z-index: -1;
+  pointer-events: none;
+}
