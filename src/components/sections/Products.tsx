@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Canvas } from '@react-three/fiber'
 import { categories, products, type ProductCategory } from '../../data/products'
 import SectionHeader from '../ui/SectionHeader'
-import ProductMesh from '../three/ProductMesh'
+import ProductVisual from '../ui/ProductVisual'
 import MagneticButton from '../ui/MagneticButton'
 
 function useTilt() {
@@ -118,18 +117,9 @@ export default function Products() {
                 }}
               />
 
-              {/* 3D viz */}
-              <div className="relative h-44 overflow-hidden bg-gradient-to-br from-[#0a1520] to-[#12202e]">
-                <Canvas
-                  dpr={[1, 1.5]}
-                  camera={{ position: [1.4, 1, 2.2], fov: 35 }}
-                  gl={{ alpha: true, antialias: true }}
-                >
-                  <ambientLight intensity={0.5} />
-                  <directionalLight position={[3, 4, 2]} intensity={1.4} />
-                  <pointLight position={[-2, 1, -1]} intensity={1} color={p.color} />
-                  <ProductMesh shape={p.shape} color={p.color} speed={0.4 + i * 0.04} />
-                </Canvas>
+              {/* Stylized blueprint viz (pure SVG+CSS to avoid >16 WebGL contexts) */}
+              <div className="relative h-44 overflow-hidden">
+                <ProductVisual shape={p.shape} color={p.color} speed={14 + i * 1.6} />
                 {p.badge && (
                   <span
                     className="absolute left-3 top-3 rounded-sm px-2 py-0.5 font-rajdhani text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white"

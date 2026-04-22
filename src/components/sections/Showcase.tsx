@@ -1,7 +1,6 @@
-import { Canvas } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 import SectionHeader from '../ui/SectionHeader'
-import ProductMesh from '../three/ProductMesh'
+import ProductVisual from '../ui/ProductVisual'
 import type { Product } from '../../data/products'
 
 const tiles: { shape: Product['shape']; color: string; label: string; tag: string }[] = [
@@ -34,17 +33,7 @@ export default function Showcase() {
               transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-[color:var(--color-neon)]/12 bg-[color:var(--color-card)]/70 backdrop-blur-md transition-all duration-500 hover:border-[color:var(--color-neon)]/40 hover:shadow-[0_24px_80px_-30px_rgba(0,245,255,0.35)]"
             >
-              <Canvas
-                dpr={[1, 1.6]}
-                camera={{ position: [1.8, 1.2, 2.2], fov: 36 }}
-                gl={{ alpha: true, antialias: true }}
-              >
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[3, 4, 2]} intensity={1.1} />
-                <pointLight position={[-2, 1, -1]} intensity={1.2} color={t.color} />
-                <pointLight position={[2, -1, 1]} intensity={0.5} color="#ff6b35" />
-                <ProductMesh shape={t.shape} color={t.color} speed={0.4 + i * 0.06} />
-              </Canvas>
+              <ProductVisual shape={t.shape} color={t.color} speed={16 + i * 2} />
 
               {/* Readout overlay */}
               <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-5">
