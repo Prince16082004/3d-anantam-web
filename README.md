@@ -1,16 +1,64 @@
-# React + Vite
+# Anantam · Futuristic 3D Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Premium, immersive web experience for **Anantam Aerials & Robotics** — a Pune-based
+3D printing & drone studio. Built with a modern React stack and real-time 3D.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript** + **Vite 8**
+- **Tailwind CSS v4** (via `@tailwindcss/vite`)
+- **Three.js** with **@react-three/fiber** + **@react-three/drei**
+- **@react-three/postprocessing** (bloom, chromatic aberration)
+- **Framer Motion** (scroll-driven + gesture animations)
+- **Lenis** (smooth, inertia-based scrolling)
+- **GSAP** (retained for bespoke timelines)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Interactive 3D drone hero with mouse-parallax, PBR metal + emissive neon
+- 3D printer scene in the About section with live print simulation
+- Liquid dual-layer custom cursor with magnetic hover
+- Animated multi-ring loader with progress
+- Fullscreen morphing menu with staggered line-reveal
+- Infinite marquee, glassmorphism product cards with 3D tilt + cursor spotlight
+- Scroll-linked parallax, reveal animations, stat counters
+- Particle + shader grid 3D background
+- Instant-quote calculator, stats strip, testimonials, CTA
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev       # Start Vite dev server
+npm run build     # tsc -b && vite build
+npm run preview   # Preview production build
+npm run lint      # ESLint
+```
+
+## Backend
+
+The `server/` directory contains the original Express + SQLite backend (auth,
+Razorpay, admin, etc.). It is **untouched** by the frontend rebuild. Run it from
+`server/` with its own `package.json`.
+
+## Structure
+
+```
+src/
+├── components/
+│   ├── background/        # 3D particle/grid background canvas
+│   ├── sections/          # Page sections (Hero, Products, About, …)
+│   ├── three/             # R3F scenes & models (Drone, Printer, ProductMesh)
+│   ├── ui/                # Reusable primitives (MagneticButton, SectionHeader)
+│   ├── LiquidCursor.tsx
+│   ├── Loader.tsx
+│   ├── Navbar.tsx
+│   ├── InteractiveMenu.tsx
+│   ├── ScrollProgress.tsx
+│   └── Footer.tsx
+├── data/                  # Static content (products, services, testimonials)
+├── hooks/useLenis.ts
+├── App.tsx
+├── main.tsx
+└── index.css              # Tailwind v4 + custom utilities & keyframes
+```
