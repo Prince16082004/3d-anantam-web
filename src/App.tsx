@@ -19,7 +19,15 @@ import { useLenis } from './hooks/useLenis'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  // Gate heavy WebGL scenes behind the loader — mounting three Canvases while
+  // the loader is running starves its setTimeout on low-end hardware.
+  const [ready, setReady] = useState(false)
   useLenis()
+
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 1800)
+    return () => clearTimeout(t)
+  }, [])
 
   // Hash-fade scroll spy — nothing critical, just adds polish
   useEffect(() => {
@@ -38,18 +46,18 @@ export default function App() {
       <Loader />
       <LiquidCursor />
       <ScrollProgress />
-      <ParticleField />
+      {ready && <ParticleField />}
 
       <Navbar onOpenMenu={() => setMenuOpen(true)} />
       <InteractiveMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
       <main className="relative noise">
-        <Hero />
+        <Hero mountScene={ready} />
         <Stats />
         <Products />
         <Services />
         <Upload />
-        <About />
+        <About mountScene={ready} />
         <Showcase />
         <Testimonials />
         <CTA />

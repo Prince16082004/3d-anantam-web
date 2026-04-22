@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import HeroScene from '../three/HeroScene'
 import MagneticButton from '../ui/MagneticButton'
 
-export default function Hero() {
+export default function Hero({ mountScene = true }: { mountScene?: boolean } = {}) {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -26,7 +26,7 @@ export default function Hero() {
         aria-hidden
       >
         <div className="grid-bg pointer-events-none absolute inset-0 opacity-30" />
-        <HeroScene />
+        {mountScene && <HeroScene />}
         {/* Vignette */}
         <div
           className="pointer-events-none absolute inset-0"

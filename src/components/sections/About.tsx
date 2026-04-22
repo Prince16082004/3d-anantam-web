@@ -5,7 +5,7 @@ import SectionHeader from '../ui/SectionHeader'
 import MagneticButton from '../ui/MagneticButton'
 import PrinterScene from '../three/PrinterScene'
 
-export default function About() {
+export default function About({ mountScene = true }: { mountScene?: boolean } = {}) {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -28,7 +28,7 @@ export default function About() {
             className="aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--color-neon)]/15 bg-gradient-to-br from-[#081424] to-[#0a1f2e]"
             style={{ boxShadow: '0 40px 80px -30px rgba(0,245,255,0.25)' }}
           >
-            <PrinterScene />
+            {mountScene && <PrinterScene />}
           </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

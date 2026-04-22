@@ -1,28 +1,38 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
+// Duration the "calibrating" screen stays up before fading out. Kept short on
+// purpose: the heavy 3D scenes take a moment to warm up so we don't want to
+// block the user behind an arbitrarily long fake-progress animation.
+const LOADER_DURATION_MS = 1600
+const FADE_DELAY_MS = 320
+
 export default function Loader() {
   const [progress, setProgress] = useState(0)
   const [visible, setVisible] = useState(true)
 
+  // Progress number is cosmetic — drive it with a cheap setInterval so a
+  // frame-starved main thread (three.js warm-up, shader compile) doesn't keep
+  // the loader pinned. A hard setTimeout guarantees we always dismiss.
   useEffect(() => {
-    let raf = 0
-    const start = performance.now()
-    const duration = 1600
-
-    function tick(now: number) {
-      const t = Math.min(1, (now - start) / duration)
-      // Ease-out cubic
+    const start = Date.now()
+    const tick = setInterval(() => {
+      const elapsed = Date.now() - start
+      const t = Math.min(1, elapsed / LOADER_DURATION_MS)
       const eased = 1 - Math.pow(1 - t, 3)
       setProgress(Math.round(eased * 100))
-      if (t < 1) {
-        raf = requestAnimationFrame(tick)
-      } else {
-        setTimeout(() => setVisible(false), 320)
-      }
+      if (t >= 1) clearInterval(tick)
+    }, 40)
+
+    const hide = setTimeout(() => {
+      setProgress(100)
+      setVisible(false)
+    }, LOADER_DURATION_MS + FADE_DELAY_MS)
+
+    return () => {
+      clearInterval(tick)
+      clearTimeout(hide)
     }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
   }, [])
 
   return (
